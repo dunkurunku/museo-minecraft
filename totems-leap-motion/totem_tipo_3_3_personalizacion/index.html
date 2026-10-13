@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+     <!-- PANTALLA MODO KIOSKO-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tótem Interactivo - Personalización</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body>
+
+    <!-- PANTALLA DE ESPERA (IDLE) -->
+    <div id="idle-screen" class="active">
+        <div class="idle-content">
+            <h1>Personaliza tu Equipo</h1>
+            <p>Extiende tu mano y cierra el puño para comenzar.</p>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE LA APLICACIÓN -->
+    <div id="app-screen">
+
+        <!--SUPERIOR: Hotbar -->
+        <header id="hotbar-container">
+            <div class="slot" id="slot-0" data-piece="casco" title="Casco"></div>
+            <div class="slot" id="slot-1" data-piece="pechera" title="Pechera"></div>
+            <div class="slot" id="slot-2" data-piece="pantalones" title="Pantalones"></div>
+            <div class="slot" id="slot-3" data-piece="botas" title="Botas"></div>
+            <div class="slot" id="slot-4" data-piece="espada" title="Espada"></div>
+            <div class="slot" id="slot-5" data-piece="pico" title="Pico"></div>
+        </header>
+
+        <!-- MEDIO: Visualizador 3D -->
+        <main id="viewer-container">
+            <!-- Three.js inyectará el canvas aquí automáticamente -->
+            <button id="save-button">Guardar y Salir</button>
+        </main>
+
+        <!--INFERIOR: Controles -->
+         <footer id="controls-container">
+            <div class="custom-button" id="lapislazuli-button" data-custom="1"></div>
+            <div class="custom-button" id="redstone-button" data-custom="2"></div>
+        </footer>
+
+    </div>
+
+    <!-- CURSOR LEAP MOTION -->
+    <div id="leap-cursor"></div>
+
+
+    <!-- BOTÓN DE TUTORIAL -->
+    <div id="help-button">?</div>
+
+    <!-- CAPA OSCURA PARA EL FONDO DURANTE EL TUTORIAL -->
+    <div id="tutorial-overlay" class="hidden"></div>
+
+    <!-- CAJA DE TEXTO DEL TUTORIAL -->
+    <div id="tutorial-box" class="hidden">
+        <p id="tutorial-text">Texto del paso</p>
+        <div class="tutorial-controls">
+            <button id="skip-btn">Saltar</button>
+            <button id="next-btn">Siguiente &raquo;</button>
+        </div>
+    </div>
+    <!-- Librerías y Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script><!-- Libreria para renderizar 3D-->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script><!-- Cargador de modelos 3D glTF -->
+    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leapjs@0.6.4/leap-0.6.4.min.js"></script><!-- Libreria Leap Motion -->
+    <script src="archivos_integracion_leap/leap-translator.js"></script>
+
+</body>
+</html>

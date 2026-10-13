@@ -1,0 +1,58 @@
+/* --- ESTILOS PARA LA PANTALLA DE DESCANSO (TEMA CLARO) --- */
+
+#idle-screen {
+    cursor: pointer;
+}
+
+.idle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0; 
+    margin: 0;
+    /*Centra el texto a una posición más cómoda para la vista */
+    transform: translateY(-100px)
+}
+
+.idle-logo {
+    max-width: 250px; 
+    height: auto;
+    margin-bottom: 3rem;
+    display: block;
+}
+
+/* --- REFINAMIENTO DE LA TIPOGRAFÍA (TEMA CLARO) --- */
+
+#idle-screen h1 {
+    font-size: 5.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 0 0 1.5rem 0; 
+    color: #2c2c2c; 
+}
+
+#idle-screen p {
+    font-size: 2rem;
+    color: #555555;
+    font-weight: 400;
+    margin: 0;
+    animation: pulse-light 2.5s infinite ease-in-out;
+}
+
+/* --- ANIMACIÓN DE PULSO --- */
+@keyframes pulse-light {
+    0% {
+        color: #555555;
+        letter-spacing: 1px;
+    }
+    50% {
+        color: #2c2c2c;
+        letter-spacing: 1.5px;
+    }
+    100% {
+        color: #555555;
+        letter-spacing: 1px;
+    }
+}

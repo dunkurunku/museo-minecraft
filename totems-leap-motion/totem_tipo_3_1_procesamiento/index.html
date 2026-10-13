@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo Minecraft - Interfaz</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Importmap para cargar Three.js desde CDN -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Fondo y contenedor principal -->
+    <div id="background-image"></div> <div id="app-container"></div>
+    
+    <!-- Hotbar de materias primas -->
+    <header class="hotbar" id="hotbar-raw">
+        <div class="slot" id="raw-0"></div> 
+        <div class="slot" id="raw-1"></div> 
+        <div class="slot" id="raw-2"></div> 
+        <div class="slot" id="raw-3"></div> 
+        <div class="slot" id="raw-4"></div> 
+        <div class="slot" id="raw-5"></div> 
+        <div class="slot" id="raw-6"></div> 
+    </header>
+
+    <main class="crafting-area">
+        
+        <!-- Estación: Horno -->
+        <div class="crafting-station" id="horno">
+            <!-- Canvas para el modelo 3D -->
+            <canvas id="horno-canvas"></canvas>
+
+            <!-- UI del horno -->
+            <div class="crafting-ui" id="furnace-ui">
+                <div class="crafting-title">Horno</div>
+                <div class="crafting-slots">
+                    <div class="slot" id="furnace-input"></div>
+                    <div class="progress-arrow" id="furnace-process">
+                        <div class="progress-arrow-inner"></div>
+                    </div>
+                    <div class="slot" id="furnace-output"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Estación: Yunque -->
+        <div class="crafting-station" id="yunque">
+            <canvas id="yunque-canvas"></canvas>
+            <div class="crafting-ui" id="anvil-ui">
+                <div class="crafting-title">Yunque</div>
+                <div class="crafting-slots">
+                    <div class="slot" id="anvil-input-1"></div>
+                    <div class="progress-arrow" id="anvil-process">
+                        <div class="progress-arrow-inner"></div>
+                    </div>
+                    <div class="slot" id="anvil-output"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Botón de salida y guardado -->
+    <div style="text-align: center; padding: 10px; background-color: rgba(0, 0, 0, 0.2);">
+        <button id="guardar-salida-btn" 
+                style="padding: 12px 22px; 
+                       font-size: 18px; 
+                       font-weight: bold; 
+                       color: #3a3a3a;
+                       background-color: #c6c6c6; 
+                       border: 2px solid #373737; 
+                       cursor: pointer;">
+            Guardar en Inventario y Salir
+        </button>
+    </div>
+
+    <!-- Hotbar de objetos procesados -->
+    <footer class="hotbar" id="hotbar-processed">
+        <div class="slot" id="proc-0"></div> 
+        <div class="slot" id="proc-1"></div> 
+        <div class="slot" id="proc-2"></div> 
+        <div class="slot" id="proc-3"></div> 
+        <div class="slot" id="proc-4"></div> 
+        <div class="slot" id="proc-5"></div> 
+        <div class="slot" id="proc-6"></div> 
+    </footer>
+
+    <!-- Pantalla de espera -->
+    <div id="idle-screen">
+        <div class="idle-content">
+            <img src="logo.png" alt="Logo Museo" class="idle-logo">
+            <h1>Extiende tu mano para comenzar</h1>
+            <p>Extend your hand to start</p>
+        </div>
+    </div>
+
+    <!-- Botón de ayuda y tutorial -->
+    <div id="help-button">?</div>
+
+    <div id="tutorial-overlay" class="hidden"></div>
+
+    <div id="tutorial-box" class="hidden">
+        <p id="tutorial-text">Texto del paso aquí...</p>
+        <div class="tutorial-controls">
+            <button id="skip-btn">Saltar</button>
+            <button id="next-btn">Siguiente &raquo;</button>
+        </div>
+    </div>
+
+    <!-- Librería Leap Motion -->
+    <script src="https://cdn.jsdelivr.net/npm/leapjs@0.6.4/leap-0.6.4.min.js"></script>
+    
+    <!-- Traductor de gestos -->
+    <script src="leap-translator.js"></script>
+
+    <!-- Cursor controlado con Leap -->
+    <div id="leap-cursor"></div>
+
+    <!-- Lógica principal -->
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>

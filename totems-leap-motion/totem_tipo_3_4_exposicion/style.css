@@ -1,0 +1,134 @@
+/* Importación para obtener la fuente característica de Minecraft */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    /* Fondo base por si la imagen tarda en cargar */
+    background-color: #101010; 
+    font-family: 'VT323', monospace;
+    height: 100vh;
+    width: 100vw; 
+    overflow: hidden; /* Evita scroll accidental */
+    color: white;
+    /* Necesario para colocar el fondo difuminado con ::before */
+    position: relative; 
+}
+
+/* FONDO DIFUMINADO CON pseudo-elemento */
+body::before {
+    content: "";
+    position: absolute;
+    /* Se amplía el área para que el blur no deje bordes raros */
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    z-index: -1; 
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* Difuminado del fondo */
+    filter: blur(8px);
+}
+
+#main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    /* Degradado oscuro en el fondo general */
+    background: radial-gradient(circle at center 40%, rgba(42, 42, 42, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+/* CONTENEDOR DEL CANVAS 3D */
+#canvas-container {
+    position: relative;
+    flex-grow: 1;
+    width: 100%;
+    overflow: hidden; /* Evita que se salga el canvas al rotar */
+}
+
+#webgl-canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    outline: none;
+    /* El canvas es transparente para integrarse con el fondo */
+    background: transparent; 
+}
+
+#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #aaa;
+    font-size: 3rem;
+    pointer-events: none; /* No bloquea clics */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    /* Para que sea legible sobre fondos oscuros */
+    text-shadow: 2px 2px 4px black;
+}
+
+/* --- PANTALLA DE INACTIVIDAD (IDLE) --- */
+/* Esta pantalla cubre todo cuando el usuario no interactúa durante 10s */
+#idle-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); 
+  color: white;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8vh 0;
+  opacity: 0; /* Oculta por defecto */
+  pointer-events: none; /* No bloquea el resto de la interfaz */
+  transition: opacity 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+#idle-screen.visible {
+    display: flex; 
+    opacity: 1;
+    pointer-events: auto; /* Vuelve a ser interactivo */
+}
+
+.idle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    transform: translateY(-100px); /* Ajuste visual */
+}
+
+.idle-logo {
+    max-width: 250px; 
+    height: auto;
+    margin-bottom: 3rem;
+}
+
+#idle-screen h1 {
+    font-size: 5.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 0 0 1.5rem 0; 
+    color: #e6dfdf; 
+}
+
+#idle-screen p {
+    font-size: 2rem;
+    color: #d6cbcb;
+    font-weight: 400;
+    margin: 0;
+}

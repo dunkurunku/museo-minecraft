@@ -1,0 +1,469 @@
+/* --- ESTILOS GLOBALES Y RESET --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Evita seleccionar texto o imagenes accidentalmente */
+    user-select: none; 
+    -webkit-user-select: none;  
+}
+
+html, body {
+    /*Fuerza a ocupar todo el viewport*/
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Sin barras de scroll */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: transparent; /* Importante para ver la imagen de fondo */
+}
+
+/* IMAGEN DE FONDO */
+/* Usamos un pseudo-elemento para el fondo para mantenerlo fijo y detrás de todo, y que el blur no afecte al resto de la aplicación */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/icons/Fondo.png') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(2px);
+    z-index: -1; 
+}
+
+/* --- GESTIÓN DE PANTALLAS --- */
+
+/*Define las dos pantallas que tiene el totem*/
+#idle-screen,
+#app-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /*Ambas están ocultas hasta que se indique lo contrario*/
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.7s ease-in-out, visibility 0s 0.7s;
+}
+
+/*Estado activo de las pantallas*/
+#idle-screen.active,
+#app-screen.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.7s ease-in-out, visibility 0s 0s;
+}
+
+/* --- PANTALLA DE ESPERA (IDLE) --- */
+/*Diseño de la propia pantalla*/
+#idle-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    
+    /* Fondo semitransparente*/
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/*Contenido centrado*/
+#idle-screen .idle-content {
+    max-width: 80%;
+}
+
+/* Textos de idle */
+#idle-screen h1 {
+    font-size: 6rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+#idle-screen p {
+    font-size: 2rem;
+    line-height: 1.6;
+    color: #1a1a1a;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+
+
+/* --- PANTALLA DE APLICACIÓN --- */
+/*La pantalla de aplicación está dividida en 3 partes, de arriba a abajo: hotbar, visor y controles*/
+/*La hotbar ocupa 1/7 de la pantalla, el visor 4/7 y los controles 2/7*/
+
+/*Diseño de la propia pantalla*/
+#app-screen {
+    display: flex;/*Necesario para dividir la pantalla*/
+    flex-direction: column; /*Organiza los elementos en columna*/
+    height: 100vh; 
+    z-index: 5;
+}
+
+
+/* --- HOTBAR --- */
+#hotbar-container {
+    flex: 1; /* Ocupa 1 parte del alto total */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 15px; 
+
+    /* Contenedor sutilmente visible */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/*Estilo de cada slot de la hotbar*/
+.slot {
+    /* Tamaño relativo a la pantalla, pero con un máximo para no crecer demasiado */
+    width: 13vh;
+    height: 13vh;
+    max-width: 140px;
+    max-height: 140px;
+    
+    /*Fondo casi invisible con un borde fino*/
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    
+    /*Icono*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 75%; 
+    
+    /*Efectos para los hover*/
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+/* --- CONTROLES --- */
+#controls-container {
+    flex: 2; /** Ocupa 2 partes del alto total */
+    display: flex;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-button {
+    flex: 1; 
+    height: 100%;
+    cursor: pointer;
+    position: relative;
+
+
+    background-color: rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /*Icono*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%; 
+
+    /*Efecto*/
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/*El último botón no tiene borde derecho para evitar doble borde visual*/
+.custom-button:last-child {
+    border-right: none;
+}
+
+/*Imágenes específicas de los botones*/
+#lapislazuli-button { background-image: url('../assets/icons/lapis.png'); }
+#redstone-button { background-image: url('../assets/icons/redstone.png'); }
+
+/*La clase hover-effect simula el hover para el leap. Está creado en el Javascript*/
+/*Efectos para hover y hover-effect*/
+.slot:not(.unavailable):hover,
+.slot:not(.unavailable).hover-effect,
+.custom-button:not(.disabled):hover,
+.custom-button:not(.disabled).hover-effect {
+
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 
+        inset 0 0 20px rgba(255, 255, 255, 0.3), 
+        0 0 20px rgba(255, 255, 255, 0.5);     
+}
+
+
+/* --- ESTADOS ACTIVOS Y ESPECIALES --- */
+
+/* Slot Seleccionado*/
+.slot.selected {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-width: 2px;
+    box-shadow: 
+        inset 0 0 10px rgba(255, 255, 255, 0.3),
+        0 0 20px rgba(0, 122, 255, 0.5); 
+}
+
+/* Efecto Click. La clase active-click representa el "click" con el leap */
+.custom-button:not(.disabled):active,
+.custom-button:not(.disabled).active-click {
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.1s;
+}
+
+/* Elementos no disponibles */
+.slot.unavailable,
+.custom-button.disabled {
+    opacity: 0.2;
+    filter: grayscale(1);
+    cursor: not-allowed;
+    background-color: transparent;
+    border-color: rgba(255,255,255,0.05);
+}
+
+
+/* --- 4/7 MEDIO: VISUALIZADOR 3D --- */
+#viewer-container {
+    flex: 4; /*Ocupa 4 partes del alto total*/
+    position: relative;
+    width: 100%;
+    overflow: hidden; 
+}
+
+#viewer-container canvas {
+    display: block;
+    width: 100% !important;/*Esto sirve para evitar fallos de márgenes con Three.js*/
+    height: 100% !important;
+    outline: none;
+}
+
+/*--- BOTÓN GUARDAR (ESTÁNDAR) ---*/
+#save-button {
+    position: absolute;
+    bottom: 5%; 
+    right: 5%;  
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    z-index: 100;
+    
+    font-family: inherit;
+    color: #2c2c2c; 
+    border: 2px solid #2c2c2c;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+/*Hover del boton guardar */
+#save-button:hover {
+    background-color: #2c2c2c;
+    color: #fafafa;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/*Corrección para el botón guardar en el tutorial*/
+/*El último paso del tutorial daba errores visuales con el botón guardar y ha habido que corregirlo*/
+/*Aparecía oscuro de más, sin fondo, y moviéndose de su posición en la pantalla*/
+#save-button.tutorial-highlight {
+    position: absolute !important;
+    z-index: 10001 !important;
+    
+    background-color: rgba(255, 255, 255, 0.95) !important;
+
+    box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.8),
+        0 0 0 9999px rgba(0, 0, 0, 0.85) !important;
+        
+    outline: 4px solid #ffffff !important;
+}
+
+/* --- LEAP MOTION CURSOR --- */
+/*Feedback visual para facilitar el control del leap. Por defecto, se intuye la mano abierta*/
+#leap-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 255, 0, 0.7); /* Verde */
+    border: 2px solid white;
+    border-radius: 50%;
+    z-index: 20000 !important; /*Siempre encima de todo*/
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    display: none;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/*Feedback visual para cuando se agarra con el leap*/
+#leap-cursor.grabbing {
+    background-color: rgba(255, 0, 0, 0.8); /* Rojo */
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+/*Feedback visual para el gesto especial del Leap*/
+#leap-cursor.special-gesture {
+    background-color: #00FFFF; /* Cyan */
+    transform: translate(-50%, -50%) scale(1.2);
+    box-shadow: 0 0 20px #00FFFF;
+}
+
+/* --- CURSORES PERSONALIZADOS --- */
+
+/* Cuando se coge la Lapis con el Leap */
+#leap-cursor.cursor-lapis {
+    background-color: transparent;
+    background-image: url('../assets/icons/lapis.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+
+    border-radius: 0; 
+    width: 50px; 
+    height: 50px;
+
+    box-shadow: none;
+    filter: drop-shadow(0 0 10px rgba(0, 85, 212, 0.8)); /* Glow azul */
+}
+
+/* Cuando se coge redstone con el Leap*/
+#leap-cursor.cursor-redstone {
+    background-color: transparent;
+    background-image: url('../assets/icons/redstone.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+
+    border-radius: 0;
+    width: 50px;
+    height: 50px;
+
+    box-shadow: none;
+    filter: drop-shadow(0 0 10px rgba(207, 0, 0, 0.8)); /* Glow rojo */
+}
+
+/* Feedback visual cuando se hace la "X" correctamente */
+#leap-cursor.success-action {
+    transform: translate(-50%, -50%) scale(1.5);
+    filter: brightness(2) drop-shadow(0 0 20px white) !important;
+    transition: all 0.2s ease;
+}
+
+/* --- ETUTORIAL --- */
+
+/* Botón de ayuda */
+#help-button {
+    position: fixed;
+    top: 20px; right: 20px;
+    width: 50px; height: 50px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 4px; 
+    border: 3px solid #ffffff;
+    outline: 3px solid #000000;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+    
+    display: flex; justify-content: center; align-items: center;
+    font-size: 24px; font-weight: bold; cursor: pointer;
+    z-index: 1999; /*Siempre encima de todo menos del cursor del Leap*/
+    font-family: 'Courier New', monospace;
+    transition: transform 0.1s, opacity 0.3s; 
+    
+    /*Estado por defecto oculto*/
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Mostrar botón de ayuda */
+#help-button.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/*Hover del botón de ayuda*/
+#help-button:hover { transform: scale(1.05); background-color: #2563eb; }
+
+/* Capa oscura mientras se ve el tutorial*/
+#tutorial-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9998;
+    transition: opacity 0.3s;
+}
+#tutorial-overlay.hidden, #tutorial-box.hidden { display: none; }
+
+/* Elemento destacado durante el tutorial*/
+.tutorial-highlight {
+    position: relative !important; 
+    z-index: 10001 !important; 
+    background-color: transparent; /* Ligeramente visible */
+    outline: 4px solid #ffffff !important;
+    border-radius: 12px;
+     box-shadow: 
+        0 0 15px rgba(255, 255, 255, 0.8), /* Brillo blanco cercano */
+        0 0 0 9999px rgba(0, 0, 0, 0.85) !important; /* Oscuridad de fondo*/
+    pointer-events: none; /* No dejar clicar durante el tutorial */
+}
+
+/* Caja de texto del tutorial. Emula texto de minecraft */
+#tutorial-box {
+    position: absolute; 
+    z-index: 10000; 
+    background-color: #C6C6C6;
+    border: 3px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF; 
+    outline: 2px solid #000000;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+    padding: 15px;
+    width: 320px; 
+    color: #3f3f3f;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-align: center;
+    transition: top 0.3s, left 0.3s;
+}
+
+#tutorial-box p {
+    margin: 0 0 20px 0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+/*Controles para el tutorial*/
+.tutorial-controls { display: flex; justify-content: space-between; }
+
+/*Botones del tutorial, consistentes con la caja*/
+.tutorial-controls button {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    color: #3f3f3f;
+    background-color: #C6C6C6;
+    border: 2px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    outline: 2px solid #000000;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+/*Efectos de hover para los botones del tutorial*/
+.tutorial-controls button:hover { background-color: #dadaff; }
+.tutorial-controls button:active {
+    border-color: #555555 #FFFFFF #FFFFFF #555555;
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}

@@ -1,0 +1,311 @@
+/* Estilos generales para el cuerpo del documento. */
+body {
+    /* Se eliminan los márgenes por defecto para que ocupe toda la ventana. */
+    margin: 0;
+    /* Se ocultan las barras de scroll que pudieran aparecer. */
+    overflow: hidden;
+    /* Se establece un fondo negro sólido, visible en los bordes si la ventana no tiene la misma proporción que la app. */
+    background-color: #000;
+    /* Se utiliza Flexbox para centrar el contenedor principal de la aplicación. */
+    display: flex;
+    justify-content: center; /* Centrado horizontal. */
+    align-items: center; /* Centrado vertical. */
+    /* Se asegura que el body ocupe el 100% de la altura de la ventana. */
+    height: 100vh;
+}
+
+/* Estilos para el elemento canvas generado por Three.js. */
+canvas {
+    /* Se posiciona de forma absoluta respecto a su contenedor padre ('#app-container'). */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* Se define un índice de apilamiento para que el canvas esté por encima del fondo pero debajo de la UI. */
+    z-index: 1;
+    /* Se permite que el canvas reciba eventos del puntero (necesario para OrbitControls). */
+    pointer-events: auto;
+    /* El canvas se estirará para ocupar el 100% del tamaño de su contenedor padre. */
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para el contenedor principal de toda la aplicación. */
+#app-container {
+    /* Se establece un contexto de posicionamiento para sus hijos. */
+    position: relative; 
+    /* Se definen las dimensiones fijas del diseño original (proporción de tótem vertical). */
+    width: 1080px;
+    height: 1920px;
+    /* Se establece el origen de la transformación en el centro para un escalado uniforme. */
+    transform-origin: center center;
+    
+    /* Se establece la imagen de fondo de la escena. */
+    background-image: url('images/fondo_pantalla.jpg');
+    /* La imagen de fondo cubrirá todo el contenedor sin deformarse. */
+    background-size: cover;
+    /* La imagen de fondo se centrará dentro del contenedor. */
+    background-position: center;
+    /* La imagen de fondo no se repetirá. */
+    background-repeat: no-repeat;
+
+    /* Por defecto, el contenedor no captura eventos de puntero, los pasa a sus hijos. */
+    pointer-events: none;
+    /* Evita que el contenedor se encoja si el espacio del 'body' es menor que sus dimensiones. */
+    flex-shrink: 0;
+}
+
+/* Contenedor que agrupa todos los elementos de la interfaz de usuario. */
+#ui-container {
+    /* Se posiciona de forma absoluta para superponerse a la escena 3D. */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* Se coloca en una capa superior al canvas. */
+    z-index: 5;
+    /* No captura eventos, permitiendo que los paneles hijos lo hagan. */
+    pointer-events: none;
+}
+
+/* Clase base para los paneles de la interfaz (hotbars y selector). */
+.panel {
+    /* Se posiciona de forma absoluta dentro de su contexto de posicionamiento ('#app-container'). */
+    position: absolute;
+    
+    /* Se aplica un estilo visual semitransparente. */
+    background-color: rgba(10, 15, 25, 0.7);
+    border: 1px solid rgba(127, 178, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    /* Aplica un efecto de desenfoque al fondo que está detrás del panel. */
+    backdrop-filter: blur(8px);
+    
+    /* Se usa Flexbox para organizar los items internos. */
+    display: flex;
+    align-items: center; /* Centrado vertical de los items. */
+    
+    /* Se añade espaciado interno. */
+    padding: 20px;
+    /* El padding y borde se incluyen en el cálculo del tamaño total del elemento. */
+    box-sizing: border-box;
+    /* Se define un espaciado de 20px entre los items del panel. */
+    gap: 20px;
+    
+    /* Se reactivan los eventos de puntero para que los paneles sean interactivos. */
+    pointer-events: auto;
+    /* Se asegura que los paneles estén en una capa superior al canvas. */
+    z-index: 10;
+}
+
+/* Estilos comunes para las barras de items (hotbars). */
+.hotbar {
+    height: 170px;
+    /* Se posiciona al 50% desde la izquierda. */
+    left: 50%;
+    /* Se desplaza -50% de su propio ancho para un centrado horizontal perfecto. */
+    transform: translateX(-50%);
+    /* Los items dentro de la hotbar se centrarán horizontalmente. */
+    justify-content: center;
+}
+
+/* Posicionamiento específico para la hotbar superior. */
+.hotbar.top {
+    /* Se desplaza a la izquierda del centro para dejar espacio a la hotbar de palos. */
+    left: 40%;
+    top: 100px;
+}
+
+/* Posicionamiento para la hotbar de palos. */
+#sticks-hotbar {
+    /* Se usa 'calc' para posicionarla a la derecha del centro de la pantalla. */
+    left: calc(50% + 250px);
+    transform: translateX(-50%);
+    /* El ancho se adapta a su contenido. */
+    width: auto;
+}
+
+/* Posicionamiento para la hotbar inferior. */
+.hotbar.bottom {
+    bottom: 60px;
+}
+
+/* Posicionamiento para el panel selector de la izquierda. */
+.selector-panel {
+    left: 60px;
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical perfecto. */
+    width: 170px;
+    /* Los items se apilarán uno encima de otro. */
+    flex-direction: column;
+    justify-content: center;
+    /* La altura se ajusta a la cantidad de items. */
+    height: auto;
+}
+
+/* Estilos para cada slot individual de item. */
+.item {
+    width: 120px;
+    height: 120px;
+    border: 2px solid rgba(127, 178, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    /* El cursor cambia a una mano para indicar que el elemento es interactivo. */
+    cursor: pointer;
+    /* Se aplica una transición suave a todas las propiedades que cambien. */
+    transition: all 0.2s ease-out;
+    
+    /* Se ajusta la imagen de fondo para que quepa completamente dentro del slot. */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Estilo que se aplica cuando el cursor pasa por encima de un item. */
+.item:hover {
+    /* Se agranda ligeramente el item. */
+    transform: scale(1.08);
+    /* El borde se hace más visible. */
+    border-color: rgba(127, 178, 255, 0.8);
+}
+
+/* Estilo para un item que ha sido seleccionado activamente. */
+.item.selected {
+    /* Se aplica un borde brillante y más grueso. */
+    border: 3px solid #00f2ff;
+    /* Se mantiene el tamaño agrandado. */
+    transform: scale(1.08);
+    /* Se añade un efecto de brillo interior y exterior. */
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.6), inset 0 0 10px rgba(0, 242, 255, 0.2);
+}
+
+/* Estilo para items que no están disponibles o no son interactivos. */
+.item.disabled, .static-item {
+    /* Se reduce la opacidad para que parezcan apagados. */
+    opacity: 0.3;
+    /* Se muestra un cursor de 'no permitido'. */
+    cursor: not-allowed;
+    /* La imagen se muestra en escala de grises. */
+    filter: grayscale(100%);
+    box-shadow: none;
+}
+
+/* Se anulan los efectos de hover para los items deshabilitados. */
+.item.disabled:hover, .static-item:hover {
+    transform: none;
+    border-color: rgba(127, 178, 255, 0.2);
+    box-shadow: none;
+}
+
+/* Estilos para el cuadro de texto de feedback (mensajes de error, etc.). */
+#feedback-box {
+    position: absolute;
+    bottom: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(200, 50, 50);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 2px solid #ff8a8a;
+    font-family: monospace;
+    font-size: 3em;
+    text-align: center;
+    /* Se coloca en una capa muy alta para que siempre sea visible. */
+    z-index: 50;
+    /* Por defecto es invisible. */
+    opacity: 0;
+    /* No interfiere con los clics. */
+    pointer-events: none;
+    /* Se aplica una transición suave para su aparición y desaparición. */
+    transition: opacity 0.3s ease-in-out;
+    width: 80%;
+    max-width: 850px;
+    box-sizing: border-box;
+}
+
+/* Clase que se añade con JavaScript para hacer visible el cuadro de feedback. */
+#feedback-box.visible {
+    opacity: 1;
+}
+
+/* Estilos para el texto de ayuda contextual. */
+#help-text {
+    position: absolute;
+    bottom: 250px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 850px;
+    background-color: rgba(10, 15, 25, 0.6);
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    color: #f0f0f0;
+    font-family: monospace;
+    font-size: 2.5em;
+    text-align: center;
+    /* Se añade una sombra al texto para mejorar la legibilidad sobre fondos complejos. */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    /* Se coloca por debajo del cuadro de feedback en caso de que aparezcan a la vez. */
+    z-index: 40;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Estilos para la pantalla de bienvenida. */
+#splash-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 15, 25, 0.85);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Se coloca en la capa más alta para cubrir toda la aplicación. */
+    z-index: 200;
+    /* Por defecto es visible. */
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+/* Clase que se añade con JavaScript para ocultar la pantalla de bienvenida. */
+#splash-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Estilos para el título principal en la pantalla de bienvenida. */
+#splash-screen h1 {
+    font-size: 4.5em;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    margin-bottom: 20px;
+    /* Se le asigna una animación para darle un efecto pulsante. */
+    animation: splash-text-animation 2.5s ease-in-out infinite alternate;
+}
+
+/* Estilos para el párrafo en la pantalla de bienvenida. */
+#splash-screen p {
+    font-size: 2em;
+    max-width: 80%;
+    opacity: 0.9;
+}
+
+/* Definición de la animación para el texto de la pantalla de bienvenida. */
+@keyframes splash-text-animation {
+    /* Estado inicial de la animación. */
+    from {
+        transform: scale(1.0);
+    }
+    /* Estado final de la animación. */
+    to {
+        transform: scale(1.05);
+    }
+}

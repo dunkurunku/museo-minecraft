@@ -1,0 +1,7 @@
+redstone
+diamante
+palos
+lingote_oro
+lapiz
+lingote_hierro
+piedra

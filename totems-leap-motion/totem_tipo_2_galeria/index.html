@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Configuración de kiosko -->
+    <meta name="viewport" content="width=1080, user-scalable=no, target-densitydpi=device-dpi">
+    <title>Galería Digital del Museo</title>
+
+    <!-- Enlaces a las hojas de estilo -->
+    <!-- main.css contiene los estilos generales y compartidos -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Estilos específicos para cada "pantalla" o "estado" de la aplicación -->
+    <link rel="stylesheet" href="css/idle-screen.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/detail-view.css">
+
+    <!-- Import Map para Módulos Externos-->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/",
+            "tween": "https://unpkg.com/@tweenjs/tween.js@23.1.1/dist/tween.esm.js"
+        }
+    }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Canvas para la escena 3D -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- 
+        Contenedor para la Pantalla de Inactividad
+    -->
+    <div id="idle-screen" class="active">
+        <div class="idle-content">
+            <img src="assets/images/logo-museo.png" alt="Logo del Museo" class="idle-logo">
+            <h1>Minecraft Museo</h1>
+            <p>
+                Extiende tu mano y cierra el puño para comenzar.<br>
+                Extend your hand and close your fist to start.
+            </p>
+        </div>
+    </div>
+
+    <!-- 
+        Contenedor para la Interfaz de la Galería
+    -->
+    <div id="gallery-ui">
+        <p class="interaction-hint" id="gallery-instruction">Extiende el pulgar y mueve la mano para explorar</p>
+        <button id="home-button" title="Volver al inicio">←</button>
+        <div class="object-label"></div>
+    </div>
+
+    <!-- 
+        Contenedor para la Vista Detallada del Objeto
+    -->
+    <div id="detail-view-ui">
+        <h1 class="object-title">Nombre del Objeto</h1>
+        <div class="description-box">
+            <!-- Pestañas para cambiar entre niveles de descripción -->
+            <div class="tabs">
+                <button class="tab-button active" data-level="1" id="tab-general">General</button>
+                <button class="tab-button" data-level="2" id="tab-technical">Técnica</button>
+                <button class="tab-button" data-level="3" id="tab-history">Historia</button>
+            </div>
+            <p class="description-text" data-level="1">
+                Infrmación general sobre la pieza.
+            </p>
+            <p class="description-text" data-level="2" style="display: none;">
+                Detalles técnicos
+            </p>
+            <p class="description-text" data-level="3" style="display: none;">
+                Contexto historico
+            </p>
+        </div>
+        <!-- Botón para volver a la galería -->
+        <button id="back-button">← Volver a la Galería</button>
+    </div>
+
+
+    <!-- 
+        Scripts de la aplicación
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/leapjs@0.6.4/leap-0.6.4.min.js"></script>
+    <script src="js/leap-translator.js"></script>
+
+    <div id="leap-cursor"></div>
+
+    <script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>

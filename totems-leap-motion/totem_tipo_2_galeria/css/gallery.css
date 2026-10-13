@@ -1,0 +1,129 @@
+/* --- ESTILOS PARA LA VISTA DE GALERÍA --- */
+
+#gallery-ui {
+
+    user-select: none;
+    -webkit-user-select: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- ESTILO PARA EL NOMBRE DEL OBJETO EN FOCO --- */
+.object-label {
+    position: absolute;
+
+    /* Sin fondo ni efectos */
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+
+    /* Texto negro */
+    color: #2c2c2c;
+    font-size: 2.2rem;
+    font-weight: 400;
+
+    /* Sombra para legibilidad */
+    text-shadow: 0 1px 10px rgba(255, 255, 255, 0.7);
+
+    /* Animación y visibilidad */
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    pointer-events: none;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.object-label.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* --- TEXTO INFERIOR --- */
+
+.interaction-hint {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Centra horizontalmente */
+    width: 100%;
+    text-align: center;
+
+
+    color: #1a1a1a;
+    font-size: 2rem;
+    font-weight: 400;
+    opacity: 0;
+
+    /* Evita que interfiera con clics */
+    pointer-events: none;
+}
+
+/* --- BOTÓN HOME --- */
+
+#home-button {
+    /*Posición fija en la pantalla*/
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 10;
+
+    /* Estilo visual */
+    width: 150px;
+    height: 150px;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Estilo del texto (la flecha) */
+    color: #2c2c2c;
+    font-size: 6rem;
+    line-height: 150px;
+    text-align: center;
+
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    pointer-events: auto;
+}
+
+/*Animación de pasar por encima*/
+#home-button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+/* --- ANIMACIÓN DEL TEXTO INFERIOR --- */
+
+#gallery-ui.active .interaction-hint {
+    animation: fadeInOut 6s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

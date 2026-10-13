@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- FONDO -->
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- MODELO 3D (BASE) -->
+    <io.github.sceneview.SceneView
+        android:id="@+id/sceneView"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="55dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- LA CARA -->
+    <ImageView
+        android:id="@+id/ivFace"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="28dp"
+        android:elevation="10dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/sceneView"
+        app:layout_constraintEnd_toEndOf="@+id/sceneView"
+        app:layout_constraintStart_toStartOf="@+id/sceneView"
+        tools:src="@android:color/white" />
+
+
+    <!-- GAMERTAG -->
+    <TextView
+        android:id="@+id/tvGamertag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Steve"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:fontFamily="@font/minecraft_font"
+        android:background="#80000000"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textAlignment="center"
+        android:layout_marginBottom="12dp"
+        android:elevation="10dp"
+
+        app:layout_constraintStart_toStartOf="@+id/ivFace"
+        app:layout_constraintEnd_toEndOf="@+id/ivFace"
+        app:layout_constraintBottom_toTopOf="@+id/ivFace"
+        />
+
+    <!-- MARCOS DE HERRAMIENTAS (SUPERIOR) -->
+    <ImageView
+        android:id="@+id/ivFrameSword"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/frame"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFramePickaxe"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/frame"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

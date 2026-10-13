@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+  Define el tipo de documento como HTML5.
+  El atributo 'lang' especifica que el idioma principal de la página es el español.
+-->
+<html lang="es">
+<head>
+    <!-- Define la codificación de caracteres del documento como UTF-8, compatible con la mayoría de símbolos. -->
+    <meta charset="UTF-8">
+    
+    <!-- Configura el viewport para asegurar que la página se adapte correctamente a diferentes tamaños de pantalla, especialmente en dispositivos móviles. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Establece el título que aparecerá en la pestaña del navegador. -->
+    <title>Tótem de Crafteo</title>
+    
+    <!-- Enlaza este documento HTML con la hoja de estilos externa 'style.css' para aplicar el diseño visual. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+      Contenedor principal de toda la aplicación.
+      Este 'div' es el anclaje para el lienzo de Three.js y todos los elementos de la interfaz.
+      Su 'id' es usado por 'main.js' para añadir el canvas y por 'style.css' para aplicar el escalado.
+    -->
+    <div id="app-container">
+
+        <!--
+          Pantalla de bienvenida o 'splash screen'.
+          Se superpone al resto de la aplicación al inicio.
+          Su visibilidad es controlada por 'main.js' a través de la clase 'hidden'.
+        -->
+        <div id="splash-screen">
+            <h1>Tótem de Construcción</h1>
+            <p>¡Cierra el puño y extiende el pulgar para empezar a utilizar tus materiales!</p>
+        </div>
+
+        <!-- Elemento 'div' vacío destinado a mostrar mensajes de feedback temporales al usuario. -->
+        <div id="feedback-box"></div>
+        
+        <!-- Elemento 'div' vacío para mostrar textos de ayuda contextuales durante la interacción. -->
+        <div id="help-text"></div>
+
+        <!--
+          Contenedor para los elementos de la interfaz de usuario (HUD).
+          Agrupa todos los paneles para facilitar su posicionamiento y gestión de capas.
+        -->
+        <div id="ui-container">
+            <!-- Barra superior para los materiales principales (hierro, oro, diamante). -->
+            <div id="materials-hotbar" class="panel hotbar top"></div>
+            
+            <!-- Barra superior para el material 'palos'. -->
+            <div id="sticks-hotbar" class="panel hotbar top"></div>
+            
+            <!-- Panel lateral para la selección de tipos de pieza (espada, pico, etc.). -->
+            <div id="piece-selector" class="panel selector-panel"></div>
+            
+            <!-- Barra inferior que muestra el inventario de las piezas ya crafteadas. -->
+            <div id="pieces-hotbar" class="panel hotbar bottom"></div>
+        </div>
+    </div>
+
+    <!--
+      Definición del 'importmap'.
+      Es un estándar moderno que permite usar nombres cortos ('three') en las sentencias 'import'
+      de JavaScript, mapeándolos a URLs completas. Esto simplifica la gestión de dependencias
+      de tipo módulo sin necesidad de un empaquetador como Webpack.
+    -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.157.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <!--
+      Carga de scripts de tipo "clásico".
+      Estos scripts no usan 'import'/'export' y definen variables en el objeto global 'window'.
+      Deben cargarse antes que los módulos que dependen de ellos.
+    -->
+    <!-- Carga la librería LeapJS desde su CDN. Crea el objeto global 'Leap'. -->
+    <script src="https://cdn.jsdelivr.net/npm/leapjs@0.6.4/leap-0.6.4.min.js"></script>
+    
+    <!-- Carga el script traductor, que usa el objeto 'Leap' y crea 'window.leapInput'. -->
+    <script src="leap-translator.js"></script>
+
+    <!--
+      Carga del script principal como un módulo ES6.
+      El atributo 'type="module"' activa el uso de 'import' y 'export' dentro de 'main.js'.
+      Se carga al final para asegurar que todas las dependencias (clásicas y del importmap) estén disponibles.
+    -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+
+    <!-- EL CONTENEDOR REDONDEADO  -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardAchievement"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- EL FONDO REAL -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99212121">
+
+            <!-- IMAGEN DEL LOGRO -->
+            <ImageView
+                android:id="@+id/ivAchievementIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/star_on" />
+
+            <!-- CAPA DE DESTELLO (Selección) -->
+            <View
+                android:id="@+id/viewSelectionBorder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#40FFFFFF"
+                android:visibility="gone"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

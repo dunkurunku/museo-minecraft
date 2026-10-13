@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* Estilo base general */
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #2e2e2e, #1a1a1a);
+    font-family: 'VT323', monospace;
+    color: white;
+    overflow: hidden; /* Evitar scrollbars accidentales */
+}
+
+/* Imagen de fondo borrosa detrás de toda la UI */
+#background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('background.png'); 
+    background-size: cover;
+    background-position: center;
+    /* Post-procesado CSS para vibe oscuro */
+    filter: blur(8px) brightness(0.7);
+    -webkit-filter: blur(8px) brightness(0.7);
+    z-index: -1; 
+    pointer-events: none; /* Click-through para no bloquear la UI */
+}
+
+/* --- HOTBARS & INVENTARIO --- */
+
+.hotbar {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px; 
+    border: 2px solid #555;
+    gap: 5px; 
+    flex-wrap: wrap; /* Evita que se rompa en pantallas pequeñas */
+}
+
+/* Casillas tipo Minecraft */
+.slot {
+    width: 75px; 
+    height: 75px; 
+    background-color: #8b8b8b;
+    border: 2px solid #373737;
+    /* Falso borde interior */
+    box-shadow: 0 0 0 2px #c6c6c6; 
+    image-rendering: pixelated; /* Pixel art nítido */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.slot:hover {
+    border: 2px solid #c6c6c6; 
+    box-shadow: 0 0 0 2px #FFFFFF; /* Highlight */
+}
+
+.slot.faded {
+    opacity: 0.3; /* Estado inactivo */
+}
+
+.slot img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+}
+
+/* --- ZONA 3D (THREE.JS) --- */
+
+.crafting-area {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px; 
+    padding: 10px;
+    flex-direction: column; /* Diseño vertical */
+}
+
+/* Contenedor del canvas + UI del horno/yunque */
+.crafting-station {
+    display: block;
+    width: 90%; 
+    height: 450px; 
+    padding: 5px; 
+    text-align: center;
+    position: relative; 
+    max-width: 500px; 
+}
+
+.crafting-station canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* Cleanup: Matar UIs viejas si quedan en el DOM */
+.crafting-ui {
+    display: none !important;
+}
+
+/* --- BOTONES GENÉRICOS --- */
+
+#guardar-salida-btn {
+    padding: 12px 22px; 
+    font-size: 18px; 
+    font-weight: bold; 
+    color: #3a3a3a;
+    background-color: #c6c6c6; 
+    border: 2px solid #373737; 
+    cursor: pointer;
+}
+
+/* --- IDLE SCREENSAVER --- */
+
+#idle-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); 
+  color: white;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8vh 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+#idle-screen.visible {
+    display: flex; 
+    opacity: 1;
+    pointer-events: auto; /* Reactivar inputs */
+}
+
+/* Contenido centrado del idle screen */
+.idle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    transform: translateY(-100px) /* Offset visual hacia arriba */
+}
+
+.idle-logo {
+    max-width: 250px; 
+    height: auto;
+    margin-bottom: 3rem;
+}
+
+#idle-screen h1 {
+    font-size: 5.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin: 0 0 1.5rem 0; 
+    color: #e6dfdf; 
+}
+
+#idle-screen p {
+    font-size: 2rem;
+    color: #d6cbcb;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Pulso suave en texto */
+@keyframes pulse-light {
+    0% { color: #555555; letter-spacing: 1px; }
+    50% { color: #2c2c2c; letter-spacing: 1.5px; }
+    100% { color: #555555; letter-spacing: 1px; }
+}
+
+/* --- TUTORIAL SYSTEM --- */
+
+#help-button {
+    position: fixed;
+    top: 20px; right: 20px;
+    width: 50px; height: 50px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 4px; 
+    border: 3px solid #ffffff;
+    outline: 3px solid #000000;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.5); /* Hard shadow */
+    
+    display: flex; justify-content: center; align-items: center;
+    font-size: 24px; font-weight: bold; cursor: pointer;
+    z-index: 2000; 
+    font-family: 'Courier New', monospace;
+    transition: transform 0.1s;
+    image-rendering: pixelated;
+}
+
+#help-button:hover {
+    transform: scale(1.05);
+    background-color: #2563eb;
+}
+
+/* Backdrop oscuro para bloquear lo demás */
+#tutorial-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 9998;
+    transition: opacity 0.3s;
+}
+
+#tutorial-overlay.hidden, #tutorial-box.hidden {
+    display: none;
+}
+
+/* Spotlight sobre elementos */
+.tutorial-highlight {
+    position: relative !important; 
+    z-index: 10001 !important; /* Force on top */
+    
+    /* Parche visual: Fondo sólido para tapar el backdrop */
+    background-color: #c6c6c6 !important; 
+    
+    outline: 4px solid #ffffff !important;
+    box-shadow: 0 0 50px rgba(0,0,0,1) !important;
+    
+    border-radius: 2px; 
+    pointer-events: none;
+}
+
+button.tutorial-highlight {
+    background-color: #c6c6c6 !important;
+}
+
+/* Caja del mensaje del tutorial */
+#tutorial-box {
+    position: absolute; 
+    z-index: 10000; 
+    background-color: #C6C6C6;
+    
+    /* Borde 3D tipo Minecraft */
+    border: 3px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    
+    outline: 2px solid #000000;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
+
+    padding: 15px;
+    width: 290px;
+    color: #3f3f3f;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-align: center;
+    transition: top 0.3s, left 0.3s;
+}
+
+#tutorial-box p {
+    margin: 0 0 20px 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+/* Botonera del tutorial */
+.tutorial-controls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tutorial-controls button {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    color: #3f3f3f;
+    text-shadow: 1px 1px 0 #fff;
+    
+    /* Button Styles (MC Aesthetics) */
+    background-color: #C6C6C6;
+    border: 2px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    outline: 2px solid #000000;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.tutorial-controls button:hover {
+    background-color: #dadaff; 
+    border-color: #ffffff #8f8fcf #8f8fcf #ffffff;
+}
+
+.tutorial-controls button:active {
+    /* Estado presionado: Invertir bordes */
+    border-color: #555555 #FFFFFF #FFFFFF #555555;
+    background-color: #b0b0b0;
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+/* --- LEAP MOTION DEBUG --- */
+
+#leap-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 255, 0, 0.7);
+    border: 2px solid white;
+    border-radius: 50%;
+    z-index: 20000 !important; /* Topmost layer */
+    pointer-events: none; /* Passthrough */
+    transform: translate(-50%, -50%);
+    display: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+#leap-cursor.grabbing {
+    background-color: rgba(255, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(0.8);
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_languageFragment"
+            app:destination="@id/languageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/languageFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.LanguageFragment"
+        android:label="fragment_language"
+        tools:layout="@layout/fragment_language" >
+        <action
+            android:id="@+id/action_languageFragment_to_levelFragment"
+            app:destination="@id/levelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/levelFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.LevelFragment"
+        android:label="fragment_level"
+        tools:layout="@layout/fragment_level" >
+        <action
+            android:id="@+id/action_levelFragment_to_avatarFragment"
+            app:destination="@id/avatarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/avatarFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.AvatarFragment"
+        android:label="fragment_avatar"
+        tools:layout="@layout/fragment_avatar" >
+        <action
+            android:id="@+id/action_avatarFragment_to_permissionsFragment"
+            app:destination="@id/permissionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/permissionsFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.PermissionsFragment"
+        android:label="fragment_permissions"
+        tools:layout="@layout/fragment_permissions" >
+        <action
+            android:id="@+id/action_permissionsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/achievementsFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.AchievementsFragment"
+        android:label="fragment_achievements"
+        tools:layout="@layout/fragment_achievements" />
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.InventoryFragment"
+        android:label="fragment_inventory"
+        tools:layout="@layout/fragment_inventory" />
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.ScannerFragment"
+        android:label="fragment_scanner"
+        tools:layout="@layout/fragment_scanner" >
+        <action
+            android:id="@+id/action_scannerFragment_to_miningFragment"
+            app:destination="@id/miningFragment" />
+        <action
+            android:id="@+id/action_scannerFragment_to_objectDetailFragment"
+            app:destination="@id/objectDetailFragment" />
+        <action
+            android:id="@+id/action_scannerFragment_to_roomInfoFragment"
+            app:destination="@id/roomInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/miningFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.MiningFragment"
+        android:label="fragment_mining"
+        tools:layout="@layout/fragment_mining" />
+    <fragment
+        android:id="@+id/objectDetailFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.ObjectDetailFragment"
+        android:label="fragment_object_detail"
+        tools:layout="@layout/fragment_object_detail" />
+    <fragment
+        android:id="@+id/roomInfoFragment"
+        android:name="com.example.aplicacion_npi_3.ui.fragments.RoomInfoFragment"
+        android:label="fragment_room_info"
+        tools:layout="@layout/fragment_room_info" />
+</navigation>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/onboarding_fondo"
+    android:padding="16dp">
+
+    <!-- CÁPSULA DEL NOMBRE (Contenedor) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_name_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#CC000000"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:strokeColor="#FFFFFF"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_player_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="monospace"
+            android:hint="NOMBRE DE JUGADOR"
+            android:padding="16dp"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#AAAAAA"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:inputType="textCapCharacters"
+            android:maxLines="1" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- REJILLA DE PÍXELES -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_avatar_grid"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="24dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_name_container" />
+
+
+    <!-- SLIDER DE COLOR -->
+    <View
+        android:id="@+id/view_current_color"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="104dp"
+        android:background="#FF0000"
+        app:layout_constraintStart_toStartOf="@id/rv_avatar_grid"
+        app:layout_constraintTop_toBottomOf="@id/rv_avatar_grid" />
+
+    <SeekBar
+        android:id="@+id/color_slider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:max="360"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="@id/view_current_color"
+        app:layout_constraintEnd_toEndOf="@id/rv_avatar_grid"
+        app:layout_constraintStart_toEndOf="@id/view_current_color"
+        app:layout_constraintTop_toTopOf="@id/view_current_color" />
+
+    <!-- BOTONES DE NAVEGACIÓN -->
+    <ImageButton
+        android:id="@+id/btn_back_avatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_media_previous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="#FF5555" />
+
+    <ImageButton
+        android:id="@+id/btn_next_avatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_media_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#00FFCC" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

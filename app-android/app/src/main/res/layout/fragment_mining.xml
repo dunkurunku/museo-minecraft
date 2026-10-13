@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondomining">
+
+    <TextView
+        android:id="@+id/tv_mining_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="MINANDO..."
+        android:textColor="#00FFCC"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- CONTENEDOR DEL BLOQUE Y EL PICO -->
+    <FrameLayout
+        android:id="@+id/mining_container"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/mining_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mining_title">
+
+        <!-- El Bloque -->
+        <ImageView
+            android:id="@+id/iv_block"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:src="@drawable/block_piedra" />
+
+        <!-- El Pico (Encima del bloque) -->
+        <ImageView
+            android:id="@+id/iv_pickaxe"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="top|end"
+            android:src="@drawable/ic_mining_pickaxe"
+            android:transformPivotX="120dp"
+            android:transformPivotY="120dp"
+            android:rotation="0" />
+        <!-- transformPivot pone el eje de rotación en la esquina inferior derecha (el mango) -->
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_instruction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="¡AGITA PARA PICAR!"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/mining_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/mining_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="250dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="120dp"
+        android:progressDrawable="@android:drawable/progress_horizontal"
+        android:progressTint="#4CAF50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

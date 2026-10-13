@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E1E1E">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- TÍTULO EQUIPO -->
+        <TextView
+            android:id="@+id/tv_title_inv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MI EQUIPAMIENTO"
+            android:textColor="#00FFCC"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- MENSAJE VACÍO EQUIPO -->
+        <TextView
+            android:id="@+id/tv_empty_equipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No tienes equipo equipado."
+            android:textColor="#888888"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_inv" />
+
+        <!-- RECYCLER EQUIPO -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_equipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_inv" />
+
+        <!-- TÍTULO RECURSOS  -->
+        <TextView
+            android:id="@+id/tv_title_resources"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="RECURSOS COLECTADOS"
+            android:textColor="#FFEB3B"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/rv_equipment"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- MENSAJE VACÍO RECURSOS -->
+        <TextView
+            android:id="@+id/tv_empty_resources"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inventario de recursos vacío."
+            android:textColor="#888888"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_resources" />
+
+        <!-- RECYCLER RECURSOS -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_resources"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_resources" />
+
+        <!-- BOTÓN QR (Al final de todo) -->
+        <Button
+            android:id="@+id/btn_show_qr"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="#00FFCC"
+            android:text="GENERAR QR DE PROGRESO"
+            android:textColor="#000000"
+            app:layout_constraintTop_toBottomOf="@id/rv_resources"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- IMAGEN QR SOBREPUESTA (Pop-up) -->
+        <ImageView
+            android:id="@+id/iv_qr_display"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:background="#FFFFFF"
+            android:elevation="20dp"
+            android:padding="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

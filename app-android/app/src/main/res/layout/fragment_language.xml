@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/onboarding_fondo"
+    android:padding="16dp">
+
+    <!-- TÍTULO CON ESTILO CHULO -->
+    <TextView
+        android:id="@+id/tv_title_lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="LENGUA / LANGUAGE"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- REJILLA DE BANDERAS -->
+    <GridLayout
+        android:id="@+id/grid_flags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:alignmentMode="alignMargins"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_lang"
+        app:layout_constraintBottom_toTopOf="@id/btn_next_lang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- ESPAÑA (Funcional) -->
+        <FrameLayout
+            android:id="@+id/frame_es"
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:padding="4dp">
+            <ImageButton
+                android:id="@+id/btn_lang_es"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_band_es" />
+        </FrameLayout>
+
+        <!-- INGLATERRA (Funcional) -->
+        <FrameLayout
+            android:id="@+id/frame_en"
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:padding="4dp">
+            <ImageButton
+                android:id="@+id/btn_lang_en"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_band_en" />
+        </FrameLayout>
+
+        <!-- FRANCIA (Decorativa) -->
+        <FrameLayout
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:padding="4dp">
+            <ImageButton
+                android:id="@+id/btn_lang_fr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_band_fr"
+                android:alpha="0.5"/> <!-- Un poco transparente para indicar que no está disponible -->
+        </FrameLayout>
+
+        <!-- JAPÓN (Decorativa) -->
+        <FrameLayout
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:padding="4dp">
+            <ImageButton
+                android:id="@+id/btn_lang_jp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_band_jp"
+                android:alpha="0.5"/>
+        </FrameLayout>
+
+        <!-- CHINA (Decorativa - Centrada abajo) -->
+        <FrameLayout
+            android:layout_width="140dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:layout_columnSpan="2"
+            android:layout_gravity="center_horizontal"
+            android:padding="4dp">
+            <ImageButton
+                android:id="@+id/btn_lang_cn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_band_ch"
+                android:alpha="0.5"/>
+        </FrameLayout>
+
+    </GridLayout>
+
+    <!-- Botón Siguiente -->
+    <ImageButton
+        android:id="@+id/btn_next_lang"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_media_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="#00FFCC" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

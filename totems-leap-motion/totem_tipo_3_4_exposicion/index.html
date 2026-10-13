@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Museo Minecraft Vertical</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Cursor visual del Leap Motion */
+        #leap-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ff00; /* Verde neón */
+            border-radius: 50%;
+            pointer-events: none; /* Importante para que el click pase a través */
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px #00ff00;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        /* Estado cuando el usuario "agarra" (pinch) */
+        #leap-cursor.grabbing {
+            background-color: #00ff00;
+            transform: translate(-50%, -50%) scale(0.5); /* Se encoge al agarrar */
+        }
+    </style>
+
+    <!-- Imports oficiales de Three.js en modo módulo -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Pantalla inicial tipo "screensaver" esperando la mano -->
+    <div id="idle-screen" class="visible">
+        <div class="idle-content">
+            <img src="logo.png" alt="Logo Museo" class="idle-logo">
+            <h1>Extiende tu mano para comenzar</h1>
+            <p>Extend your hand to start</p>
+        </div>
+    </div>
+
+    <!-- Cursor del Leap Motion -->
+    <div id="leap-cursor"></div>
+
+    <!-- Contenedor principal de Three.js -->
+    <div id="main-layout">
+        <div id="canvas-container">
+            <div id="loading">Cargando...</div>
+            <canvas id="webgl-canvas"></canvas>
+        </div>
+    </div>
+
+    <!-- Librería oficial Leap Motion V2 Websocket -->
+    <script src="https://cdn.jsdelivr.net/npm/leapjs@0.6.4/leap-0.6.4.min.js"></script>
+    
+    <!-- Adaptador personalizado que traduce gestos a acciones -->
+    <script src="leap-translator.js"></script>
+    
+    <!-- Código principal del museo -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

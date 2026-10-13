@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Se define el tipo de documento como HTML5 y el idioma principal como español. -->
+<html lang="es">
+<head>
+    <!-- Se define la codificación de caracteres como UTF-8. -->
+    <meta charset="UTF-8">
+    <!-- Se configura el viewport para una correcta visualización en diferentes dispositivos. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Se establece el título que se mostrará en la pestaña del navegador. -->
+    <title>Prototipo integración leap motion</title>
+
+    <!--
+      Inicio de la sección de estilos CSS.
+      Los estilos se definen directamente en el documento para simplificar el prototipo.
+    -->
+    <style>
+        /* Estilos aplicados al cuerpo del documento. */
+        body {
+            /* Se eliminan los márgenes por defecto. */
+            margin: 0;
+            /* Se ocultan las barras de desplazamiento. */
+            overflow: hidden;
+            /* Se establece un color de fondo oscuro. */
+            background-color: #111;
+        }
+        
+        /* Estilos para el elemento canvas. */
+        canvas {
+            /* Se establece como un bloque para que ocupe su propia línea. */
+            display: block;
+        }
+        
+        /* Estilos para el cuadro de información que mostrará los datos del Leap Motion. */
+        #info-box {
+            /* Se posiciona de forma absoluta, relativo al 'body'. */
+            position: absolute;
+            
+            /* Se posiciona el punto superior izquierdo del elemento en el centro de la pantalla. */
+            top: 50%;
+            left: 50%;
+            /* Se traslada el elemento -50% de su propio ancho y alto para un centrado perfecto. */
+            transform: translate(-50%, -50%);
+            
+            /* Se definen los estilos visuales para la apariencia del cuadro. */
+            padding: 20px; /* Espaciado interno. */
+            background-color: rgb(42, 42, 42, 0.7); /* Color de fondo semitransparente. */
+            color: white; /* Color del texto. */
+            font-family: monospace; /* Fuente de ancho fijo, ideal para mostrar datos alineados. */
+            font-size: 20px; /* Tamaño del texto. */
+            border-radius: 8px; /* Esquinas redondeadas. */
+            text-align: left; /* Alineación del texto. */
+            line-height: 1.5; /* Espaciado entre líneas. */
+
+            /* Por defecto, el elemento está oculto. */
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+    <!--
+      Contenido principal de la página.
+    -->
+
+    <!--
+      Elemento 'div' que actuará como monitor de depuración.
+      El script 'main.js' lo seleccionará por su 'id' para insertar dinámicamente
+      el texto con los datos traducidos del Leap Motion.
+    -->
+    <div id="info-box"></div>
+
+    <!--
+      Sección de carga de scripts JavaScript.
+      El orden de estas etiquetas es fundamental para el correcto funcionamiento de la aplicación,
+      ya que define el orden en que se cargan y ejecutan las dependencias.
+    -->
+
+    <!-- Se carga la librería LeapJS desde una CDN. Este script debe cargarse primero
+         porque crea el objeto global 'Leap' del que depende 'leap-translator.js'. -->
+    <script src="https://cdn.jsdelivr.net/npm/leapjs@0.6.4/leap-0.6.4.min.js"></script>
+    
+    <!-- Se carga la librería Three.js desde una CDN. Debe cargarse antes que 'main.js',
+         ya que este último necesita el objeto global 'THREE' que este script crea. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Se carga el script del traductor. Debe ir después de LeapJS y antes de main.js,
+         porque consume el objeto 'Leap' y produce el objeto 'window.leapInput' que 'main.js' necesita. -->
+    <script src="leap-translator.js"></script>
+    
+    <!-- Se carga el script principal de la aplicación. Es el último en ejecutarse,
+         orquestando la escena 3D y utilizando los datos del traductor para la interacción. -->
+    <script src="main.js"></script>
+</body>
+</html>
