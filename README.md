@@ -4,7 +4,9 @@ Proyecto de la asignatura Nuevos Paradigmas de Interacción (Grado en Ingenierí
 
 Trabajo en grupo. **Mi parte:** el tótem de procesamiento (horno y yunque), el tótem de exposición con el armor stand y todos los modelos 3D del proyecto, tanto los de los tótems como los de la app Android.
 
-<!-- Vídeo de demostración: pendiente -->
+## Vídeo de demostración
+
+[Ver el vídeo promocional (3 min, versión web)](media/demo.mp4) · la versión en 1080p está en la sección *Releases* del repositorio.
 
 ## Tótems con Leap Motion (`totems-leap-motion/`)
 
