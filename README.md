@@ -1,8 +1,8 @@
 # Museo interactivo inspirado en Minecraft
 
-Proyecto de la asignatura Nuevos Paradigmas de Interacción (Grado en Ingeniería Informática, Universidad de Granada). Un museo temático de Minecraft en el que el visitante interactúa sin tocar nada: los tótems de las salas se manejan con las manos mediante un sensor Leap Motion, y una app Android acompaña la visita con un escáner de códigos QR, inventario, logros y avatar.
+Un museo temático de Minecraft en el que el visitante interactúa sin tocar nada: los tótems de las salas se manejan con las manos mediante un sensor Leap Motion, y una app Android acompaña la visita con un escáner de códigos QR, inventario, logros y avatar.
 
-Proyecto desarrollado para la asignatura.
+Proyecto de interacción natural con sensores de gestos.
 
 ## Vídeo de demostración
 
@@ -51,4 +51,4 @@ El código propio se publica bajo licencia MIT.
 
 ## English summary
 
-Interactive Minecraft-themed museum built for the Human-Computer Interaction course (Computer Engineering, University of Granada). Touchless exhibit kiosks driven by a Leap Motion sensor (HTML, JavaScript, three.js, with a custom hand-to-cursor translation layer) and a companion Android app in Kotlin (QR scanner with CameraX and ML Kit, inventory, achievements, 3D models with SceneView, bilingual UI with Navigation and ViewModel). Course project. Own code under the MIT licence; 3D assets from Sketchfab with their original licences.
+Interactive Minecraft-themed museum Touchless exhibit kiosks driven by a Leap Motion sensor (HTML, JavaScript, three.js, with a custom hand-to-cursor translation layer) and a companion Android app in Kotlin (QR scanner with CameraX and ML Kit, inventory, achievements, 3D models with SceneView, bilingual UI with Navigation and ViewModel). Natural-interaction project. Own code under the MIT licence; 3D assets from Sketchfab with their original licences.
